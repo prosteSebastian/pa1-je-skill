@@ -48,7 +48,7 @@ body{
 
     function animate(text) {
         el = document.getElementById("text");
-        setTimeout(() => {el.innerText = ".";}, "0");
+        setTimeout(() => {el.innerText = "."; document.getElementById("img").src="matyPause.png";}, "0");
         setTimeout(() => {el.innerText = "..";}, "250");
         setTimeout(() => {el.innerText = "...";}, "500");
         setTimeout(() => {el.innerText = ".";}, "750");
@@ -71,7 +71,7 @@ body{
         
     }
 </script>
-
+    
 <body>
     <center>
         <h1>Zvládnu PA1 zkoušku?</h1>
