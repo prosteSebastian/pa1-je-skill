@@ -7,86 +7,77 @@
     <title>Zvládnu to?</title>
 </head>
 <style>
-body{
-    background-color: #424549;
-    color: white;
-    font-family:Arial, Helvetica, sans-serif;
-    -webkit-user-select: none;    
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+    body{
+        background-color: #424549;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
-.image { 
-   position: relative; 
-   width: 100%; /* for IE 6 */
-}
+    .image {
+        position: relative;
+        width: 100%; /* for IE 6 */
+    }
 
-#text { 
-   position: absolute; 
-   top: 200px; 
-   left: -50px;
-   width: 100%;
-   font-size: 30px;
-}
+    #text {
+        position: absolute;
+        top: 200px;
+        left: -50px;
+        width: 100%;
+        font-size: 30px;
+    }
 
-#text2 {
-    position: absolute; 
-   top: 150px; 
-   left: 200px;
-   width: 100%;
-   font-size: 30px;
-}
-
-#map {
-    cursor: pointer;
-}
+    #map {
+        cursor: pointer;
+    }
 
 </style>
 
 <script>
-
-    function animate(text) {
-        el = document.getElementById("text");
-        setTimeout(() => {el.innerText = "."; document.getElementById("img").src="matyPause.png";}, "0");
-        setTimeout(() => {el.innerText = "..";}, "250");
-        setTimeout(() => {el.innerText = "...";}, "500");
-        setTimeout(() => {el.innerText = ".";}, "750");
-        setTimeout(() => {el.innerText = "..";}, "1000");
-        setTimeout(() => {el.innerText = "...";}, "1250");
-        setTimeout(() => {el.innerText = text;isRunning = false; if(text === "ano") {document.getElementById("img").src="matyHappy.png";} else {document.getElementById("img").src="matySad.png";}}, "1500");
-        
-    }
+    var names = ["rakmaty", "Honza Matousek", "✝","Soptik","David B.","Otto",
+        "Miiisa","Radek Husek","ostorc"];
     var isRunning = false;
+
+    function animate() {
+        var el = document.getElementById("text");
+        var interval = setInterval(function () {
+            el.textContent = getRandomName();
+        }, 100);
+
+        setTimeout(function () {
+            clearInterval(interval);
+            isRunning = false;
+        }, 2000 + Math.floor(Math.random() * 3000));
+    }
+
+    function getRandomName() {
+        var randomIndex = Math.floor(Math.random() * names.length);
+        return names[randomIndex];
+    }
+
     function calculate() {
         if (isRunning === true) return;
         isRunning = true;
-        el = document.getElementById("text");
-        sanceNaUspech = Math.floor((Math.random() * 100) + 1);
-        if(sanceNaUspech > 75) {
-            animate("ano");
-        } else {
-            animate("ne");
-        }
-        
+        var el = document.getElementById("text");
+        el.textContent = "...";
+        animate();
     }
 </script>
-    
-<body>
-    <center>
-        <h1>Zvládnu PA2 zkoušku?</h1>
-        <p>klikněte na červené tlačítko!</p>
-        <div class="image">
 
-            <img src="matyPause.png" border="0" usemap="#map" id="img">
-      
-            <p id="text"></p>
-            
-      
-      </div>
-    </center>
-    <map name="map">
-        <area shape="rect" coords="446,182,483,220" onmousedown="calculate();return true;" id="map">
-    </map>
+<body>
+<center>
+    <h1>Koho dostanu na obhajobu?</h1>
+    <p>klikněte na červené tlačítko!</p>
+    <div class="image">
+        <img src="matyPause.png" border="0" usemap="#map" id="img">
+        <p id="text"></p>
+    </div>
+</center>
+<map name="map">
+    <area shape="rect" coords="446,182,483,220" onmousedown="calculate();return true;" id="map">
+</map>
 </body>
 </html>
